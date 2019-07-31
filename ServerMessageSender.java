@@ -1,25 +1,31 @@
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.nio.Buffer;
-import java.nio.file.Files;
+import java.util.concurrent.Callable;
 
-public class ServerMessageSender extends Thread {
+public class ServerMessageSender {
 
-    private Socket server = null;
     private PrintWriter dataOut = null;
-    private BufferedReader br = null;
-    public ServerMessageSender(Socket server, PrintWriter dataOut)
+    private String requestedHtml = "";
+    public ServerMessageSender(PrintWriter dataOut)
     {
-        this.server = server;
         this.dataOut = dataOut;
-        br = new BufferedReader(new InputStreamReader(System.in));
     }
-    @Override
-    public void run()
+    public void setHtmlString(String htmlString)
     {
-
-        dataOut.print("<html><body><h1>hello world!!!</h1></body></html>");
+        this.requestedHtml = htmlString;
+    }
+    public void postResponse(String response)
+    {
+        /*byte[] b=null;
+        try {
+            InputStream in = new FileInputStream("C:\\Users\\apaithane\\Desktop\\ap.html");
+            b = new byte[in.available()];
+            in.read(b);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        dataOut.print(requestedHtml);
         dataOut.flush();
     }
 }

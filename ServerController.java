@@ -5,7 +5,6 @@ import java.net.Socket;
 public class ServerController {
 
     private static ServerSocket connectionAccepter;
-
     static {
         try {
             connectionAccepter = new ServerSocket(80);
@@ -32,14 +31,13 @@ public class ServerController {
                 count += 1;
                 PrintWriter dataOut = new PrintWriter(server.getOutputStream());
                 dataIn = new BufferedReader(new InputStreamReader(server.getInputStream()));
-                ServerMessageSender myServerMessageSender = new ServerMessageSender(server, dataOut);
-                ServerMessageReceiver myServerMessageReceiver = new ServerMessageReceiver(server, dataIn);
-                myServerMessageSender.start();
-                myServerMessageReceiver.start();
+                Connection user = new Connection(dataIn, dataOut);
+                user.start();
 
             } catch (IOException e) {
                 System.out.println(e.getMessage() + "*********************");
                 e.printStackTrace();
+                break;
             }
         }
     }

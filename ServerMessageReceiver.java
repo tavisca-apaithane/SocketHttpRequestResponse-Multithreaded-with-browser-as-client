@@ -1,31 +1,27 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
+import java.util.concurrent.Callable;
 
-public class ServerMessageReceiver extends Thread {
+public class ServerMessageReceiver  {
 
-    private Socket server = null;
     private BufferedReader dataIn = null;
-    private BufferedReader br = null;
-    public ServerMessageReceiver(Socket server, BufferedReader dataIn)
+    public ServerMessageReceiver(BufferedReader dataIn)
     {
-        this.server = server;
         this.dataIn = dataIn;
-        br = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    @Override
-    public void run()
+    public String getRequest()
     {
-
+        String HtmlFile="";
             try {
                 char[] buffer = new char[300];
                 dataIn.read(buffer);
                 String message = new String(buffer);
-                System.out.println(message);
+                HtmlFile = message.split(" ")[1];
             } catch (IOException e) {
                 e.printStackTrace();
         }
+            return HtmlFile;
     }
+
 }
