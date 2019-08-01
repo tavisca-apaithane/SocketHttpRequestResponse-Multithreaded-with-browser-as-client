@@ -15,21 +15,28 @@ public class ServerMessageReceiver  {
             try {
                 char[] buffer = new char[300];
                 dataIn.read(buffer);
-                String message = new String(buffer);
-                System.out.println(message);
-                System.out.println("*******************");
-                if(message.contains("/index.html"))
-                    HtmlFile = "/index.html";
-                else if(message.contains("/home.html"))
-                    HtmlFile = "/home.html";
-                else if(message.split(" ")[1].equals("/"))
-                    HtmlFile = "/index.html";
-                else
-                    HtmlFile = "undefined";
+                String requestMetadataFromClient = new String(buffer);
+                HtmlFile = extractRequestedHtml(requestMetadataFromClient);
             } catch (IOException e) {
                 e.printStackTrace();
         }
             return HtmlFile;
+    }
+
+    public String extractRequestedHtml(String requestMetadataFromClient)
+    {
+        String HtmlFile="";
+
+        if(requestMetadataFromClient.contains("/index.html"))
+            HtmlFile = "/index.html";
+        else if(requestMetadataFromClient.contains("/home.html"))
+            HtmlFile = "/home.html";
+        else if(requestMetadataFromClient.split(" ")[1].equals("/"))
+            HtmlFile = "/index.html";
+        else
+            HtmlFile = "undefined";
+
+        return HtmlFile;
     }
 
 }
