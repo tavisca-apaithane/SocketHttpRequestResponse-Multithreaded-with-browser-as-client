@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class ServerMessageReceiver  {
 
@@ -12,15 +13,15 @@ public class ServerMessageReceiver  {
     public String getRequest()
     {
         String HtmlFile="";
-            try {
-                char[] buffer = new char[300];
-                dataIn.read(buffer);
-                String requestMetadataFromClient = new String(buffer);
-                HtmlFile = extractRequestedHtml(requestMetadataFromClient);
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            char[] buffer = new char[300];
+            dataIn.read(buffer);
+            String requestMetadataFromClient = new String(buffer);
+            HtmlFile = extractRequestedHtml(requestMetadataFromClient);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-            return HtmlFile;
+        return HtmlFile;
     }
 
     public String extractRequestedHtml(String requestMetadataFromClient)
