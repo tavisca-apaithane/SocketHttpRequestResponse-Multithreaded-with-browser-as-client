@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.concurrent.Callable;
 
 public class ServerMessageReceiver  {
 
@@ -17,7 +16,16 @@ public class ServerMessageReceiver  {
                 char[] buffer = new char[300];
                 dataIn.read(buffer);
                 String message = new String(buffer);
-                HtmlFile = message.split(" ")[1];
+                System.out.println(message);
+                System.out.println("*******************");
+                if(message.contains("/index.html"))
+                    HtmlFile = "/index.html";
+                else if(message.contains("/home.html"))
+                    HtmlFile = "/home.html";
+                else if(message.split(" ")[1].equals("/"))
+                    HtmlFile = "/index.html";
+                else
+                    HtmlFile = "undefined";
             } catch (IOException e) {
                 e.printStackTrace();
         }

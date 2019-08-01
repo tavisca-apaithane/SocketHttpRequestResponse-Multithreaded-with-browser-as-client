@@ -1,5 +1,4 @@
-import java.io.*;
-import java.util.concurrent.Callable;
+import java.io.PrintWriter;
 
 public class ServerMessageSender {
 
@@ -15,16 +14,6 @@ public class ServerMessageSender {
     }
     public void postResponse(String response)
     {
-        /*byte[] b=null;
-        try {
-            InputStream in = new FileInputStream("C:\\Users\\apaithane\\Desktop\\ap.html");
-            b = new byte[in.available()];
-            in.read(b);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         dataOut.print(requestedHtml);
         dataOut.flush();
     }

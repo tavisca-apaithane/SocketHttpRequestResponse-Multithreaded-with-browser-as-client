@@ -16,6 +16,8 @@ public class ResponseFileFactory {
             break;
             case "/": htmlString = getIndexFile();
             break;
+            case "undefined": htmlString = "<html><h1>Error 404</h1></html>";
+            break;
         }
         return htmlString;
     }

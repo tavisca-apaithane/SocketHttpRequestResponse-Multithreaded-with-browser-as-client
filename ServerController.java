@@ -3,8 +3,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerController {
-
     private static ServerSocket connectionAccepter;
+    private static Socket server = null;
+    private static BufferedReader dataIn = null;
+    private static DataOutputStream dataOut = null;
     static {
         try {
             connectionAccepter = new ServerSocket(80);
@@ -12,13 +14,6 @@ public class ServerController {
             e.printStackTrace();
         }
     }
-
-    private static Socket server = null;
-    private static BufferedReader dataIn = null;
-    private static DataOutputStream dataOut = null;
-    public ServerController() {
-    }
-
 
     public static void main(String[] args)
     {
@@ -31,11 +26,10 @@ public class ServerController {
                 count += 1;
                 PrintWriter dataOut = new PrintWriter(server.getOutputStream());
                 dataIn = new BufferedReader(new InputStreamReader(server.getInputStream()));
-                Connection user = new Connection(dataIn, dataOut);
+                Connection user = new Connection(dataIn, dataOut, count);
                 user.start();
 
             } catch (IOException e) {
-                System.out.println(e.getMessage() + "*********************");
                 e.printStackTrace();
                 break;
             }
