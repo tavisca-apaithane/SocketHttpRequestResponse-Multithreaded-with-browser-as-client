@@ -14,7 +14,8 @@ public class ServerMessageSender {
     }
     public void postResponse(String response)
     {
-        dataOut.print(requestedHtml);
+        dataOut.print(response);
         dataOut.flush();
+
     }
 }

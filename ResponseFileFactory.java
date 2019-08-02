@@ -9,11 +9,11 @@ public class ResponseFileFactory {
         String htmlString="";
         switch (command)
         {
-            case "/index.html": htmlString = getIndexFile();
+            case "/index.html": htmlString = getHtml("index.html");
                 break;
-            case "/home.html" : htmlString = getHomeFile();
+            case "/home.html" : htmlString = getHtml("home.html");
                 break;
-            case "/": htmlString = getIndexFile();
+            case "/": htmlString = getHtml("index.html");
                 break;
             case "undefined": htmlString = "<html><h1>Error 404</h1></html>";
                 break;
@@ -21,24 +21,11 @@ public class ResponseFileFactory {
         return htmlString;
     }
 
-    private String getHomeFile() {
-
-        byte[] b=null;
-        try {
-            InputStream in = new FileInputStream("C:\\Users\\apaithane\\Desktop\\home1.html");
-            b = new byte[50000];
-            in.read(b);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new String(b);
-    }
-
-    private String getIndexFile() {
+    private String getHtml(String command) {
         byte[] b = null;
-        try {
-            InputStream in = new FileInputStream("C:\\Users\\apaithane\\Desktop\\index1.html");
-            b = new byte[1000];
+        try{
+            InputStream in = new FileInputStream("C:\\Users\\apaithane\\Desktop\\" + command);
+            b = new byte[50000];
             in.read(b);
         } catch (IOException e) {
             e.printStackTrace();

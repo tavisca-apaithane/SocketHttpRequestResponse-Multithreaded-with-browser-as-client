@@ -18,15 +18,16 @@ public class Connection extends Thread {
     public void run() {
         try {
             String request = serverMessageReceiver.getRequest();
+            ServerLogger.log("Client requested for "+ request +"...");
             ResponseFileFactory responseFileFactory = new ResponseFileFactory();
             request = responseFileFactory.generate(request);
-            serverMessageSender.setHtmlString(request);
             serverMessageSender.postResponse(request);
+            ServerLogger.log("Client request Complete...");
             this.dataOut.close();
             this.dataIn.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "inConnection");
+            ServerLogger.log("Exception in...");
         }
 
     }
