@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ResponseFileFactory {
-    private String command="";
     public ResponseFileFactory(){}
     public String generate(String command)
     {

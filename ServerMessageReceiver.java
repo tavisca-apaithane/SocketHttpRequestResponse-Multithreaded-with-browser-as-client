@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 public class ServerMessageReceiver  {
 
@@ -12,7 +11,7 @@ public class ServerMessageReceiver  {
 
     public String getRequest()
     {
-        String HtmlFile="";
+        String HtmlFile = "";
         try {
             char[] buffer = new char[300];
             dataIn.read(buffer);

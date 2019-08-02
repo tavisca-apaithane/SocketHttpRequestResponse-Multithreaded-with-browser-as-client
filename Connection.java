@@ -1,24 +1,17 @@
-
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
 public class Connection extends Thread {
-    private String requestedHtml = "";
     ServerMessageSender serverMessageSender = null;
     ServerMessageReceiver serverMessageReceiver = null;
     BufferedReader dataIn = null;
     PrintWriter dataOut = null;
-    int count = 0;
-    static int connectionCount = 1;
 
-    public Connection(BufferedReader dataIn, PrintWriter dataOut, int count) {
+    public Connection(BufferedReader dataIn, PrintWriter dataOut) {
         this.dataIn = dataIn;
         this.dataOut = dataOut;
         serverMessageSender = new ServerMessageSender(dataOut);
         serverMessageReceiver = new ServerMessageReceiver(dataIn);
-        this.count = count;
-        System.out.println(count + " inConnection " + connectionCount);
-        connectionCount++;
     }
 
     @Override
