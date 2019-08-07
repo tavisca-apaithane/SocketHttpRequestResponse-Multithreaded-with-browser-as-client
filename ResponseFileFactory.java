@@ -4,22 +4,26 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ResponseFileFactory {
+    private String indexFilePath="src/Assets/MyIndex.html";
+    private String homeFilePath="src/Assets/home.html";
+    private String deathNoteImagePath="src/Assets/deathNote.jpg";
+    private String narutoImagePath="src/Assets/naruto.png";
     public ResponseFileFactory(){}
     public byte[] generate(String command)
     {
-        byte[] htmlFileBuffer =null;
+        byte[] htmlFileBuffer = null;
         System.out.println("COMMAND :" + command);
         switch (command)
         {
-            case "/index.html": htmlFileBuffer = getHtmlFileInByteArray("src/Assets/MyIndex.html");
+            case "/index.html": htmlFileBuffer = getHtmlFileInByteArray(indexFilePath);
                 break;
-            case "/home.html" : htmlFileBuffer = getHtmlFileInByteArray("src/Assets/home.html");
+            case "/home.html" : htmlFileBuffer = getHtmlFileInByteArray(homeFilePath);
                 break;
-            case "/": htmlFileBuffer = getHtmlFileInByteArray("src/Assets/MyIndex.html");
+            case "/": htmlFileBuffer = getHtmlFileInByteArray(indexFilePath);
                 break;
-            case "/deathNote.jpg": htmlFileBuffer = getHtmlFileInByteArray("src/Assets/deathNote.jpg");
+            case "/deathNote.jpg": htmlFileBuffer = getHtmlFileInByteArray(deathNoteImagePath);
                 break;
-            case "/naruto.png": htmlFileBuffer = getHtmlFileInByteArray("src/Assets/naruto.png");
+            case "/naruto.png": htmlFileBuffer = getHtmlFileInByteArray(narutoImagePath);
                 break;
             case "undefined": htmlFileBuffer = new String("<html><h1>Error 404</h1></html>").getBytes();
                 break;

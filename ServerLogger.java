@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class ServerLogger {
-   public static LogManager logManager = LogManager.getLogManager();
-   public static Logger logger = logManager.getLogger(Logger.GLOBAL_LOGGER_NAME);
+   private static LogManager logManager = LogManager.getLogManager();
+   private static Logger logger = logManager.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
 
     public static void log(String message)

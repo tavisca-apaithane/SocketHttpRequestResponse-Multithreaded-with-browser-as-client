@@ -17,20 +17,31 @@ public class Connection extends Thread {
 
     @Override
     public void run() {
+            String request = getRequest();
+            sendResponse(request);
+            closeStreams();
+    }
+
+    public void sendResponse(String request)
+    {
+        ResponseFileFactory responseFileFactory = new ResponseFileFactory();
+        byte[] htmlFileBuffer = responseFileFactory.generate(request);
+        serverMessageSender.postResponse(htmlFileBuffer);
+        ServerLogger.log("Client request Complete...");
+    }
+
+    public String getRequest()
+    {
+        return serverMessageReceiver.getRequestedFileName();
+    }
+
+    public void closeStreams()
+    {
         try {
-            String request = serverMessageReceiver.getRequest();
-            ServerLogger.log("Client requested for "+ request +"...");
-            ResponseFileFactory responseFileFactory = new ResponseFileFactory();
-            byte[] htmlFileBuffer = responseFileFactory.generate(request);
-            serverMessageSender.postResponse(htmlFileBuffer);
-            ServerLogger.log("Client request Complete...");
             this.dataOut.close();
             this.dataIn.close();
-
         } catch (IOException e) {
-            ServerLogger.log("Exception in Connection...");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-
     }
 }

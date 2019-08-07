@@ -9,22 +9,26 @@ public class ServerMessageReceiver  {
         this.dataIn = dataIn;
     }
 
-    public String getRequest()
+    public String getRequestedFileName()
     {
         String HtmlFile = "";
-        try {
-            char[] buffer = new char[300];
-            dataIn.read(buffer);
-            String requestMetadataFromClient = new String(buffer);
-            System.out.println(requestMetadataFromClient);
-            HtmlFile = extractRequestedHtml(requestMetadataFromClient);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        char[] buffer = getBrowserRequest();
+        HtmlFile = extractRequestedHtml(new String(buffer));
         return HtmlFile;
     }
 
-    public String extractRequestedHtml(String requestMetadataFromClient)
+    private char[] getBrowserRequest()
+    {
+        char[] buffer = new char[300];
+        try {
+            dataIn.read(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return buffer;
+    }
+
+    private String extractRequestedHtml(String requestMetadataFromClient)
     {
         String HtmlFile="";
 
