@@ -16,6 +16,7 @@ public class ServerMessageReceiver  {
             char[] buffer = new char[300];
             dataIn.read(buffer);
             String requestMetadataFromClient = new String(buffer);
+            System.out.println(requestMetadataFromClient);
             HtmlFile = extractRequestedHtml(requestMetadataFromClient);
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,6 +34,14 @@ public class ServerMessageReceiver  {
             HtmlFile = "/home.html";
         else if(requestMetadataFromClient.split(" ")[1].equals("/"))
             HtmlFile = "/index.html";
+        else if(requestMetadataFromClient.contains("/deathNote.jpg")) {
+            HtmlFile = "/deathNote.jpg";
+            System.out.println("in SErverMessageSEnder deathNote.jpg");
+        }
+        else if(requestMetadataFromClient.contains("/naruto.png")) {
+            HtmlFile = "/naruto.png";
+            System.out.println("in ServerMessageSender naruto.png");
+        }
         else
             HtmlFile = "undefined";
 

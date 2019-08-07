@@ -1,21 +1,23 @@
-import java.io.PrintWriter;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class ServerMessageSender {
 
-    private PrintWriter dataOut = null;
+    private DataOutputStream dataOut = null;
     private String requestedHtml = "";
-    public ServerMessageSender(PrintWriter dataOut)
+    public ServerMessageSender(DataOutputStream dataOut)
     {
         this.dataOut = dataOut;
     }
-    public void setHtmlString(String htmlString)
+    public void postResponse(byte[] response)
     {
-        this.requestedHtml = htmlString;
-    }
-    public void postResponse(String response)
-    {
-        dataOut.print(response);
-        dataOut.flush();
-
+        try {
+            if(response ==null)
+                System.out.println("response buffer is null...");
+            dataOut.write(response);
+            dataOut.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
